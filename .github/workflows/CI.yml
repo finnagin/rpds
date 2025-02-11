@@ -156,8 +156,8 @@ jobs:
       - uses: quansight-labs/setup-python@v5
         with:
           python-version: |
-            ${{ matrix.target != 'aarch64-pc-windows-msvc' && '3.9' || '' }}
-            ${{ matrix.target != 'aarch64-pc-windows-msvc' && '3.10' || '' }}
+            ${{ matrix.target != 'arm64' && '3.9' || '' }}
+            ${{ matrix.target != 'arm64' && '3.10' || '' }}
             3.11
             3.12
             3.13
