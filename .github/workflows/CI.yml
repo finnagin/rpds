@@ -192,7 +192,7 @@ jobs:
       - name: Build wheels
         uses: PyO3/maturin-action@v1
         with:
-          target: ${{ matrix.target }}
+          target: ${{ matrix.target == 'arm64' && 'aarch64-pc-windows-msvc' || matrix.target }}
           args: --release --out dist --interpreter ${{ matrix.target == 'arm64' && '3.11 3.12 3.13' || '3.9 3.10 3.11 3.12 3.13' }} --interpreter ${{ matrix.target == 'x64' && 'pypy3.9 pypy3.10' || '' }}
           sccache: ${{ github.ref_type != 'tag' }} # zizmor: ignore[cache-poisoning]
       - name: Upload wheels
