@@ -155,16 +155,15 @@ jobs:
 
   windows:
     needs: test
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.os || 'windows-latest' }}
 
     strategy:
       fail-fast: false
       matrix:
         target: [x64, x86] # x86 is not supported by pypy
-        os: [windows-latest]
         include:
           - target: arm64
-          - os: windows-11-arm
+            os: windows-11-arm
 
     steps:
       - uses: actions/checkout@v4
