@@ -205,9 +205,10 @@ jobs:
           architecture: ${{ matrix.target }}
       - if: ${{ matrix.os == 'windows-11-arm' }}
         run: |
-          Add-Content $env:GITHUB_PATH ${{ steps.cp311.outputs.python-path }} 
-          Add-Content $env:GITHUB_PATH ${{ steps.cp312.outputs.python-path }} 
-          Add-Content $env:GITHUB_PATH ${{ steps.cp313.outputs.python-path }} 
+          echo ${{ steps.cp311.outputs.python-path }} >> $env:GITHUB_PATH 
+          echo ${{ steps.cp312.outputs.python-path }} >> $env:GITHUB_PATH  
+          echo ${{ steps.cp313.outputs.python-path }} >> $env:GITHUB_PATH 
+          echo $env:GITHUB_PATH
       # rust toolchain is not currently installed on windopws arm64 images https://github.com/actions/partner-runner-images/issues/77
       - if: ${{ matrix.os == 'windows-11-arm' }}
         name: Setup rust
