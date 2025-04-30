@@ -203,12 +203,6 @@ jobs:
           python-version: 3.13
           allow-prereleases: true
           architecture: ${{ matrix.target }}
-      - if: ${{ matrix.os == 'windows-11-arm' }}
-        run: |
-          echo ${{ steps.cp311.outputs.python-path }} >> $env:GITHUB_PATH 
-          echo ${{ steps.cp312.outputs.python-path }} >> $env:GITHUB_PATH  
-          echo ${{ steps.cp313.outputs.python-path }} >> $env:GITHUB_PATH 
-          echo $env:GITHUB_PATH
       # rust toolchain is not currently installed on windopws arm64 images https://github.com/actions/partner-runner-images/issues/77
       - if: ${{ matrix.os == 'windows-11-arm' }}
         name: Setup rust
@@ -228,7 +222,7 @@ jobs:
         name: Build wheels
         uses: PyO3/maturin-action@v1
         with:
-          target: matrix.target
+          target: ${{ matrix.target }}
           args: --release --out dist --interpreter '3.9 3.10 3.11 3.12 3.13' --interpreter ${{ matrix.target == 'x64' && 'pypy3.9 pypy3.10' || '' }}
           sccache: ${{ github.ref_type != 'tag' }} # zizmor: ignore[cache-poisoning]
         env:
