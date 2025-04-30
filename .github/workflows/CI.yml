@@ -154,7 +154,7 @@ jobs:
           path: dist
 
   windows:
-    needs: test
+    #needs: test
     runs-on: ${{ matrix.os || 'windows-latest' }}
 
     strategy:
